@@ -1,0 +1,8 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  config.vm.synced_folder "./insider", "/insider", type: "rsync"
+  config.vm.synced_folder "../outsider", "/outsider", type: "rsync"
+  config.vm.provision "delete-all-the-things", type: "shell", inline: "rm -f /{vagrant,insider,outsider}/README.md"
+end
